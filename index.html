@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elmahdi Ait Itto — Le Coffre au Trésor</title>
+<style>
+:root{--bg1:#fdf3dc;--bg2:#f2d9a0;--ink:#2b1d0e;--muted:#6b5535;--card:#fffaf0;--line:#d9b86a;--gold:#b8860b;--gold2:#e0a82e;--wood:#8b5a2b;--wood2:#5c3a1a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#1a1230;--bg2:#0b0716;--ink:#f6ead0;--muted:#c4b28a;--card:#241a3d;--line:#5b4a2a;--gold:#f5c542;--gold2:#ffdf7a}}
+:root[data-theme="dark"]{--bg1:#1a1230;--bg2:#0b0716;--ink:#f6ead0;--muted:#c4b28a;--card:#241a3d;--line:#5b4a2a;--gold:#f5c542;--gold2:#ffdf7a}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:radial-gradient(ellipse at 50% 0%,var(--bg1),var(--bg2));background-color:var(--bg2);min-height:100vh;overflow-x:hidden}
+.stage{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;position:relative}
+h1{font-size:clamp(1.8rem,5vw,3rem);margin:0 0 6px;letter-spacing:.02em}
+.sub{color:var(--muted);margin:0 0 40px;font-style:italic}
+.chest{width:240px;height:190px;position:relative;margin:30px auto 20px;cursor:pointer;outline:none}
+.chest:focus-visible{outline:3px solid var(--ink);outline-offset:8px;border-radius:12px}
+.base{position:absolute;bottom:0;left:0;width:100%;height:110px;border-radius:6px 6px 14px 14px;background:repeating-linear-gradient(90deg,var(--wood) 0 38px,var(--wood2) 38px 41px);border:4px solid var(--gold);box-shadow:0 18px 30px rgba(0,0,0,.35)}
+.base::before,.base::after{content:"";position:absolute;top:0;bottom:0;width:14px;background:var(--gold);opacity:.85}
+.base::before{left:22px}.base::after{right:22px}
+.coins{position:absolute;bottom:106px;left:10px;right:10px;height:30px;background:radial-gradient(circle at 20% 100%,var(--gold2) 0 14px,transparent 15px),radial-gradient(circle at 45% 100%,var(--gold) 0 16px,transparent 17px),radial-gradient(circle at 70% 100%,var(--gold2) 0 15px,transparent 16px),radial-gradient(circle at 90% 100%,var(--gold) 0 13px,transparent 14px);opacity:0;transition:opacity .6s .3s}
+.lid{position:absolute;bottom:106px;left:0;width:100%;height:80px;transform-origin:0 100%;transition:transform 1s cubic-bezier(.3,1.4,.5,1);border-radius:110px 110px 0 0 / 70px 70px 0 0;background:repeating-linear-gradient(90deg,var(--wood) 0 38px,var(--wood2) 38px 41px);border:4px solid var(--gold);z-index:3}
+.lock{position:absolute;left:50%;bottom:-14px;width:30px;height:34px;margin-left:-15px;background:var(--gold2);border:3px solid var(--gold);border-radius:6px;z-index:4;transition:transform .5s,opacity .5s}
+.lock::after{content:"";position:absolute;left:11px;top:11px;width:6px;height:10px;background:var(--wood2);border-radius:3px}
+.glow{position:absolute;left:50%;bottom:90px;width:320px;height:320px;margin-left:-160px;background:radial-gradient(circle,var(--gold2),transparent 65%);opacity:0;transition:opacity .8s;pointer-events:none;filter:blur(8px)}
+.open .lid{transform:rotate(-62deg)}.open .glow{opacity:.75}.open .coins{opacity:1}.open .lock{transform:translateY(40px) rotate(20deg);opacity:0}
+.btn{font:inherit;font-size:1.05rem;padding:12px 28px;border-radius:999px;border:2px solid var(--gold);background:linear-gradient(var(--gold2),var(--gold));color:#2b1d0e;cursor:pointer;font-weight:bold;box-shadow:0 6px 16px rgba(0,0,0,.3);transition:transform .2s,filter .2s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btn.ghost{background:transparent;color:var(--ink)}
+.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold2);box-shadow:0 0 10px var(--gold2);pointer-events:none;animation:rise 1.8s ease-out forwards}
+@keyframes rise{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--dx),-260px) scale(.2)}}
+.hidden{display:none}
+.cv{max-width:920px;margin:0 auto;padding:40px 20px 80px}
+.cv.show .card{animation:pop .7s both}
+@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:none}}
+.hero{text-align:center;margin-bottom:28px}
+.hero h2{font-size:clamp(1.8rem,5vw,2.8rem);margin:0}
+.role{color:var(--gold);font-size:1.15rem;margin:6px 0 14px;font-weight:bold}
+.contact{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.contact a{color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:6px 14px;border-radius:999px;background:var(--card);font-size:.9rem;transition:border-color .2s,background .2s}
+.contact a:hover{border-color:var(--gold);background:var(--bg1)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:18px 20px;box-shadow:0 8px 22px rgba(0,0,0,.15)}
+.card.wide{grid-column:1/-1}
+.card h3{margin:0 0 10px;font-size:1.15rem}
+.card p,.card li{line-height:1.5;font-size:.96rem}
+.card ul{padding-left:18px;margin:8px 0}
+.meta{color:var(--muted);font-size:.85rem;font-style:italic;margin:0 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{border:1px solid var(--gold);border-radius:999px;padding:3px 11px;font-size:.82rem;background:transparent}
+.skills dt{font-weight:bold;margin-top:10px;color:var(--gold)}.skills dd{margin:4px 0 0}
+.again{text-align:center;margin-top:34px}
+</style>
+</head>
+<body>
+<section class="stage" id="stage">
+  <h1>Le Coffre d’Elmahdi</h1>
+  <p class="sub">Un trésor de code se cache ici… osez l’ouvrir.</p>
+  <div class="chest" id="chest" role="button" tabindex="0" aria-label="Ouvrir le coffre au trésor" aria-pressed="false">
+    <div class="glow"></div>
+    <div class="base"></div><div class="coins"></div>
+    <div class="lid"></div><div class="lock"></div>
+  </div>
+  <button class="btn" id="openBtn" type="button">🗝️ Ouvrir le coffre</button>
+</section>
+
+<main class="cv hidden" id="cv">
+  <header class="hero card" style="border-left-width:1px">
+    <h2>AIT ITTO Elmahdi</h2>
+    <p class="role">Ingénieur en Informatique · Développeur Full-Stack</p>
+    <div class="contact">
+      <a href="mailto:mehdiaititto239@gmail.com">✉️ mehdiaititto239@gmail.com</a>
+      <a href="tel:+212770325432">📞 +212 770 325 432</a>
+      <a href="https://www.linkedin.com/in/elmahdi-aititto" target="_blank" rel="noopener">in elmahdi-aititto</a>
+      <a href="https://github.com/ElmahdiAi" target="_blank" rel="noopener">⌥ ElmahdiAi</a>
+    </div>
+  </header>
+
+  <div class="grid">
+    <article class="card wide"><h3>📜 Profil</h3>
+      <p>Ingénieur récemment diplômé en génie informatique, doté d’une expérience pratique en développement d’applications web performantes et scalables. Spécialisé en backend Java, j’accorde une grande importance à la qualité du code, à la collaboration et à la performance des solutions livrées. Curieux et proactif, je suis motivé par les nouveaux défis techniques.</p></article>
+
+    <article class="card wide"><h3>💎 Expérience professionnelle</h3>
+      <p><strong>Stagiaire PFE — Ingénieur Backend · CyberGenix</strong></p>
+      <p class="meta">Avril 2025 – Septembre 2025</p>
+      <p>Plateforme de gestion et de suivi des employés avec pointage automatisé NFC/QR Code.</p>
+      <ul>
+        <li>Conception d’une API RESTful sécurisée (Spring Boot, Spring Security, JWT).</li>
+        <li>Intégration avec le frontend Next.js/TypeScript et l’application mobile React Native/Expo.</li>
+        <li>Communication temps réel via WebSockets (STOMP).</li>
+        <li>API-First Design et TDD : 80 % de couverture de tests, validée par SonarQube.</li>
+      </ul>
+      <div class="chips"><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">Next.js</span><span class="chip">React Native</span><span class="chip">Docker</span><span class="chip">SonarQube</span><span class="chip">GitLab</span><span class="chip">Forgejo</span></div>
+      <hr style="border:0;border-top:1px dashed var(--line);margin:18px 0">
+      <p><strong>Stagiaire PFA — Développeur Laravel · InnovQube</strong></p>
+      <p class="meta">Juillet 2024 – Août 2024</p>
+      <p>Plateforme SaaS dédiée à la gestion des locations.</p>
+      <ul>
+        <li>Développement des fonctionnalités backend avec Laravel.</li>
+        <li>Interfaces responsives et dynamiques avec Livewire et Tailwind CSS.</li>
+        <li>Équipe Agile/Scrum (NextCloud, OpenProject).</li>
+      </ul>
+      <div class="chips"><span class="chip">Laravel</span><span class="chip">Livewire</span><span class="chip">Tailwind CSS</span><span class="chip">MySQL</span><span class="chip">GitLab</span></div>
+    </article>
+
+    <article class="card wide"><h3>🧭 Projet — Gestion de laboratoires d’analyses médicales</h3>
+      <p class="meta">Projet académique</p>
+      <p>Application web en architecture Microservices pour la gestion des laboratoires, patients et analyses médicales.</p>
+      <ul>
+        <li>Full-stack : Spring Boot + Angular.</li>
+        <li>Authentification sécurisée via Keycloak, OAuth2, JWT.</li>
+        <li>Tests unitaires avec JUnit et Mockito.</li>
+        <li>CI/CD et conteneurisation : Docker, GitHub Actions.</li>
+      </ul></article>
+
+    <article class="card skills"><h3>⚔️ Compétences</h3>
+      <dl>
+        <dt>Backend</dt><dd>Java/Spring Boot, PHP/Laravel</dd>
+        <dt>Frontend</dt><dd>JavaScript/TypeScript, React, Next.js, Angular</dd>
+        <dt>Bases de données</dt><dd>PostgreSQL, MySQL, MongoDB</dd>
+        <dt>DevOps &amp; CI/CD</dt><dd>Docker, GitLab CI/CD, Forgejo Actions</dd>
+        <dt>Qualité &amp; Tests</dt><dd>SonarQube, JUnit, Mockito, Jest</dd>
+        <dt>Cloud</dt><dd>Azure, AWS</dd>
+      </dl></article>
+
+    <article class="card"><h3>🎓 Formation &amp; certificats</h3>
+      <p><strong>Diplôme d’Ingénieur d’État — Génie Informatique</strong></p>
+      <p class="meta">ENSA Khouribga · 2020 – 2025</p>
+      <p><strong>ALX Software Engineering — Holberton Certified</strong></p>
+      <p class="meta">2024 · Formation intensive de 12 mois, Full-Stack (C++, Python, JavaScript, SQL)</p>
+      <h3 style="margin-top:16px">🗣️ Langues</h3>
+      <div class="chips"><span class="chip">Arabe · langue maternelle</span><span class="chip">Français · courant</span><span class="chip">Anglais · courant</span></div>
+      <h3 style="margin-top:16px">🤝 Soft skills</h3>
+      <div class="chips"><span class="chip">Collaboration en Agile</span><span class="chip">Résolution de problèmes complexes</span><span class="chip">Éthique professionnelle</span></div>
+    </article>
+  </div>
+  <div class="again"><button class="btn ghost" id="closeBtn" type="button">Refermer le coffre</button></div>
+</main>
+
+<script>
+(function(){
+  var chest=document.getElementById('chest'),stage=document.getElementById('stage'),cv=document.getElementById('cv'),btn=document.getElementById('openBtn');
+  function sparks(){
+    var r=chest.getBoundingClientRect(),s=stage.getBoundingClientRect();
+    for(var i=0;i<36;i++){
+      var e=document.createElement('span');e.className='spark';
+      e.style.left=(r.left-s.left+r.width/2+(Math.random()-.5)*160)+'px';
+      e.style.top=(r.top-s.top+40)+'px';
+      e.style.setProperty('--dx',((Math.random()-.5)*200)+'px');
+      e.style.animationDelay=(Math.random()*.6)+'s';
+      stage.appendChild(e);
+      setTimeout(function(x){return function(){x.remove()}}(e),2800);
+    }
+  }
+  function open(){
+    if(chest.classList.contains('open')) return;
+    chest.classList.add('open');
+    chest.setAttribute('aria-pressed', 'true');
+    btn.disabled=true;
+    sparks();
+    setTimeout(function(){
+      cv.classList.remove('hidden');
+      var cards=cv.querySelectorAll('.card');
+      cards.forEach(function(c,i){c.style.animationDelay=(i*0.15)+'s'});
+      void cv.offsetWidth;cv.classList.add('show');
+      cv.scrollIntoView({behavior:'smooth'});
+    },1300);
+  }
+  function close(){
+    cv.classList.remove('show');cv.classList.add('hidden');
+    chest.classList.remove('open');
+    chest.setAttribute('aria-pressed', 'false');
+    btn.disabled=false;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  btn.addEventListener('click',open);
+  chest.addEventListener('click',open);
+  chest.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  document.getElementById('closeBtn').addEventListener('click',close);
+})();
+</script>
+</body>
+</html>
