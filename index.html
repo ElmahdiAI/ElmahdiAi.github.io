@@ -3,183 +3,187 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Elmahdi Ait Itto — Le Coffre au Trésor</title>
+<title>Elmahdi AIT ITTO — Ingénieur Full-Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg1:#fdf3dc;--bg2:#f2d9a0;--ink:#2b1d0e;--muted:#6b5535;--card:#fffaf0;--line:#d9b86a;--gold:#b8860b;--gold2:#e0a82e;--wood:#8b5a2b;--wood2:#5c3a1a;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#1a1230;--bg2:#0b0716;--ink:#f6ead0;--muted:#c4b28a;--card:#241a3d;--line:#5b4a2a;--gold:#f5c542;--gold2:#ffdf7a}}
-:root[data-theme="dark"]{--bg1:#1a1230;--bg2:#0b0716;--ink:#f6ead0;--muted:#c4b28a;--card:#241a3d;--line:#5b4a2a;--gold:#f5c542;--gold2:#ffdf7a}
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+:root{--bg:#F7F1E3;--card:#fffaf0;--ink:#2b2418;--mute:#6f6450;--acc:#c8553d;--acc2:#2f6f62;--line:#e4d9bf;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1812;--card:#26221a;--ink:#f3ead6;--mute:#b3a78e;--acc:#ec7c63;--acc2:#6fc0ae;--line:#3a3426}}
+:root[data-theme="dark"]{--bg:#1b1812;--card:#26221a;--ink:#f3ead6;--mute:#b3a78e;--acc:#ec7c63;--acc2:#6fc0ae;--line:#3a3426}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
 *{box-sizing:border-box}
-body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:radial-gradient(ellipse at 50% 0%,var(--bg1),var(--bg2));background-color:var(--bg2);min-height:100vh;overflow-x:hidden}
-.stage{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;position:relative}
-h1{font-size:clamp(1.8rem,5vw,3rem);margin:0 0 6px;letter-spacing:.02em}
-.sub{color:var(--muted);margin:0 0 40px;font-style:italic}
-.chest{width:240px;height:190px;position:relative;margin:30px auto 20px;cursor:pointer;outline:none}
-.chest:focus-visible{outline:3px solid var(--ink);outline-offset:8px;border-radius:12px}
-.base{position:absolute;bottom:0;left:0;width:100%;height:110px;border-radius:6px 6px 14px 14px;background:repeating-linear-gradient(90deg,var(--wood) 0 38px,var(--wood2) 38px 41px);border:4px solid var(--gold);box-shadow:0 18px 30px rgba(0,0,0,.35)}
-.base::before,.base::after{content:"";position:absolute;top:0;bottom:0;width:14px;background:var(--gold);opacity:.85}
-.base::before{left:22px}.base::after{right:22px}
-.coins{position:absolute;bottom:106px;left:10px;right:10px;height:30px;background:radial-gradient(circle at 20% 100%,var(--gold2) 0 14px,transparent 15px),radial-gradient(circle at 45% 100%,var(--gold) 0 16px,transparent 17px),radial-gradient(circle at 70% 100%,var(--gold2) 0 15px,transparent 16px),radial-gradient(circle at 90% 100%,var(--gold) 0 13px,transparent 14px);opacity:0;transition:opacity .6s .3s}
-.lid{position:absolute;bottom:106px;left:0;width:100%;height:80px;transform-origin:0 100%;transition:transform 1s cubic-bezier(.3,1.4,.5,1);border-radius:110px 110px 0 0 / 70px 70px 0 0;background:repeating-linear-gradient(90deg,var(--wood) 0 38px,var(--wood2) 38px 41px);border:4px solid var(--gold);z-index:3}
-.lock{position:absolute;left:50%;bottom:-14px;width:30px;height:34px;margin-left:-15px;background:var(--gold2);border:3px solid var(--gold);border-radius:6px;z-index:4;transition:transform .5s,opacity .5s}
-.lock::after{content:"";position:absolute;left:11px;top:11px;width:6px;height:10px;background:var(--wood2);border-radius:3px}
-.glow{position:absolute;left:50%;bottom:90px;width:320px;height:320px;margin-left:-160px;background:radial-gradient(circle,var(--gold2),transparent 65%);opacity:0;transition:opacity .8s;pointer-events:none;filter:blur(8px)}
-.open .lid{transform:rotate(-62deg)}.open .glow{opacity:.75}.open .coins{opacity:1}.open .lock{transform:translateY(40px) rotate(20deg);opacity:0}
-.btn{font:inherit;font-size:1.05rem;padding:12px 28px;border-radius:999px;border:2px solid var(--gold);background:linear-gradient(var(--gold2),var(--gold));color:#2b1d0e;cursor:pointer;font-weight:bold;box-shadow:0 6px 16px rgba(0,0,0,.3);transition:transform .2s,filter .2s}
-.btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
-.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-.btn.ghost{background:transparent;color:var(--ink)}
-.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold2);box-shadow:0 0 10px var(--gold2);pointer-events:none;animation:rise 1.8s ease-out forwards}
-@keyframes rise{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--dx),-260px) scale(.2)}}
-.hidden{display:none}
-.cv{max-width:920px;margin:0 auto;padding:40px 20px 80px}
-.cv.show .card{animation:pop .7s both}
-@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:none}}
-.hero{text-align:center;margin-bottom:28px}
-.hero h2{font-size:clamp(1.8rem,5vw,2.8rem);margin:0}
-.role{color:var(--gold);font-size:1.15rem;margin:6px 0 14px;font-weight:bold}
-.contact{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.contact a{color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:6px 14px;border-radius:999px;background:var(--card);font-size:.9rem;transition:border-color .2s,background .2s}
-.contact a:hover{border-color:var(--gold);background:var(--bg1)}
-.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:18px 20px;box-shadow:0 8px 22px rgba(0,0,0,.15)}
-.card.wide{grid-column:1/-1}
-.card h3{margin:0 0 10px;font-size:1.15rem}
-.card p,.card li{line-height:1.5;font-size:.96rem}
-.card ul{padding-left:18px;margin:8px 0}
-.meta{color:var(--muted);font-size:.85rem;font-style:italic;margin:0 0 6px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.chip{border:1px solid var(--gold);border-radius:999px;padding:3px 11px;font-size:.82rem;background:transparent}
-.skills dt{font-weight:bold;margin-top:10px;color:var(--gold)}.skills dd{margin:4px 0 0}
-.again{text-align:center;margin-top:34px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;margin:0}
+a{color:inherit}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:12px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav a{text-decoration:none;font-size:14px;font-weight:500;padding:6px 12px;border-radius:99px;color:var(--mute);transition:.2s}
+nav a:hover{background:var(--acc);color:#fff}
+section{max-width:960px;margin:0 auto;padding:72px 20px}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;z-index:-1;animation:float 9s ease-in-out infinite}
+.b1{width:260px;height:260px;background:var(--acc);top:5%;right:0}
+.b2{width:220px;height:220px;background:var(--acc2);bottom:8%;left:-40px;animation-delay:-4s}
+@keyframes float{50%{transform:translateY(-30px) scale(1.08)}}
+.hello{color:var(--acc);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+h1{font-size:clamp(40px,9vw,84px);line-height:1.02;margin:10px 0 14px;font-weight:800}
+.role{font-size:clamp(18px,3.5vw,26px);color:var(--acc2);font-weight:600;min-height:1.6em}
+.role i{display:inline-block;width:2px;height:1em;background:var(--acc2);margin-left:3px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{max-width:620px;color:var(--mute);margin:18px 0 26px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{padding:11px 20px;border-radius:99px;border:2px solid var(--ink);text-decoration:none;font-weight:600;font-size:15px;transition:.2s}
+.btn.p{background:var(--ink);color:var(--bg)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 0 -2px var(--acc)}
+h2{font-size:clamp(28px,5vw,40px);margin-bottom:28px}
+h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;background:var(--acc);margin-top:8px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+.tl{border-left:3px solid var(--line);padding-left:22px;display:grid;gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;position:relative;transition:.25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 28px -14px rgba(0,0,0,.35)}
+.tl .card::before{content:"";position:absolute;left:-31px;top:26px;width:15px;height:15px;border-radius:50%;background:var(--acc);border:3px solid var(--bg)}
+.meta{color:var(--acc);font-size:13px;font-weight:600}
+h3{font-size:21px;margin:4px 0 2px}
+.co{color:var(--mute);font-size:14px;margin-bottom:8px}
+.card ul{margin:8px 0;padding-left:18px}
+.card li{margin:4px 0}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tags span{font-size:12px;padding:3px 10px;border-radius:99px;background:color-mix(in srgb,var(--acc2) 16%,transparent);color:var(--acc2);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.sk{display:grid;gap:12px;margin-top:10px}
+.sk div b{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:5px}
+.bar{height:8px;border-radius:8px;background:var(--line);overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:8px;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.pills span{padding:6px 14px;border:1.5px solid var(--line);border-radius:99px;font-size:14px;background:var(--card);transition:.2s}
+.pills span:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
+.contact{text-align:center}
+.contact h2::after{margin-inline:auto}
+.contact .btns{justify-content:center}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:28px 20px 40px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<section class="stage" id="stage">
-  <h1>Le Coffre d’Elmahdi</h1>
-  <p class="sub">Un trésor de code se cache ici… osez l’ouvrir.</p>
-  <div class="chest" id="chest" role="button" tabindex="0" aria-label="Ouvrir le coffre au trésor" aria-pressed="false">
-    <div class="glow"></div>
-    <div class="base"></div><div class="coins"></div>
-    <div class="lid"></div><div class="lock"></div>
-  </div>
-  <button class="btn" id="openBtn" type="button">🗝️ Ouvrir le coffre</button>
+<nav>
+<a href="#accueil">Accueil</a><a href="#experience">Expérience</a><a href="#projets">Projet</a><a href="#competences">Compétences</a><a href="#formation">Formation</a><a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="accueil">
+<div class="blob b1"></div><div class="blob b2"></div>
+<div class="hello">Bonjour, je suis</div>
+<h1>Elmahdi<br>AIT ITTO</h1>
+<div class="role"><span id="typed"></span><i></i></div>
+<p class="lead">Ingénieur récemment diplômé en génie informatique, spécialisé en backend Java. J’accorde une grande importance à la qualité du code, à la collaboration et à la performance des solutions livrées.</p>
+<div class="btns"><a class="btn p" href="#contact">Me contacter</a><a class="btn" href="#experience">Voir mon parcours</a></div>
 </section>
 
-<main class="cv hidden" id="cv">
-  <header class="hero card" style="border-left-width:1px">
-    <h2>AIT ITTO Elmahdi</h2>
-    <p class="role">Ingénieur en Informatique · Développeur Full-Stack</p>
-    <div class="contact">
-      <a href="mailto:mehdiaititto239@gmail.com">✉️ mehdiaititto239@gmail.com</a>
-      <a href="tel:+212770325432">📞 +212 770 325 432</a>
-      <a href="https://www.linkedin.com/in/elmahdi-aititto" target="_blank" rel="noopener">in elmahdi-aititto</a>
-      <a href="https://github.com/ElmahdiAi" target="_blank" rel="noopener">⌥ ElmahdiAi</a>
-    </div>
-  </header>
+<section id="experience">
+<h2 class="rv">Expérience professionnelle</h2>
+<div class="tl">
+<div class="card rv">
+<div class="meta">Avril 2025 – Septembre 2025</div>
+<h3>Stagiaire PFE · Ingénieur Backend</h3>
+<div class="co">CyberGenix</div>
+<p>Plateforme de gestion et de suivi des employés avec pointage automatisé par NFC/QR Code.</p>
+<ul>
+<li>API RESTful sécurisée avec Spring Boot, Spring Security et JWT.</li>
+<li>Intégration avec le frontend Next.js/TypeScript et l’application mobile React Native/Expo.</li>
+<li>Communication en temps réel via WebSockets (STOMP).</li>
+<li>API-First Design et TDD : 80 % de couverture de tests, validée par SonarQube.</li>
+</ul>
+<div class="tags"><span>Spring Boot</span><span>PostgreSQL</span><span>Next.js</span><span>React Native</span><span>Docker</span><span>SonarQube</span><span>GitLab</span></div>
+</div>
+<div class="card rv">
+<div class="meta">Juillet 2024 – Août 2024</div>
+<h3>Stagiaire PFA · Développeur Laravel</h3>
+<div class="co">InnovQube</div>
+<p>Plateforme SaaS dédiée à la gestion des locations.</p>
+<ul>
+<li>Développement des principales fonctionnalités backend avec Laravel.</li>
+<li>Interfaces responsives et dynamiques avec Livewire et Tailwind CSS.</li>
+<li>Travail en équipe Agile/Scrum (NextCloud, OpenProject).</li>
+</ul>
+<div class="tags"><span>Laravel</span><span>Livewire</span><span>Tailwind CSS</span><span>MySQL</span><span>GitLab</span></div>
+</div>
+</div>
+</section>
 
-  <div class="grid">
-    <article class="card wide"><h3>📜 Profil</h3>
-      <p>Ingénieur récemment diplômé en génie informatique, doté d’une expérience pratique en développement d’applications web performantes et scalables. Spécialisé en backend Java, j’accorde une grande importance à la qualité du code, à la collaboration et à la performance des solutions livrées. Curieux et proactif, je suis motivé par les nouveaux défis techniques.</p></article>
+<section id="projets">
+<h2 class="rv">Projet</h2>
+<div class="card rv">
+<div class="meta">Projet académique</div>
+<h3>Gestion de laboratoires d’analyses médicales</h3>
+<p>Application web en architecture Microservices pour gérer laboratoires, patients et analyses médicales.</p>
+<ul>
+<li>Full-stack avec Spring Boot et Angular.</li>
+<li>Authentification sécurisée : Keycloak, OAuth2, JWT.</li>
+<li>Tests unitaires avec JUnit et Mockito.</li>
+<li>CI/CD et conteneurisation avec Docker et GitHub Actions.</li>
+</ul>
+<div class="tags"><span>Microservices</span><span>Angular</span><span>Keycloak</span><span>Docker</span></div>
+</div>
+</section>
 
-    <article class="card wide"><h3>💎 Expérience professionnelle</h3>
-      <p><strong>Stagiaire PFE — Ingénieur Backend · CyberGenix</strong></p>
-      <p class="meta">Avril 2025 – Septembre 2025</p>
-      <p>Plateforme de gestion et de suivi des employés avec pointage automatisé NFC/QR Code.</p>
-      <ul>
-        <li>Conception d’une API RESTful sécurisée (Spring Boot, Spring Security, JWT).</li>
-        <li>Intégration avec le frontend Next.js/TypeScript et l’application mobile React Native/Expo.</li>
-        <li>Communication temps réel via WebSockets (STOMP).</li>
-        <li>API-First Design et TDD : 80 % de couverture de tests, validée par SonarQube.</li>
-      </ul>
-      <div class="chips"><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">Next.js</span><span class="chip">React Native</span><span class="chip">Docker</span><span class="chip">SonarQube</span><span class="chip">GitLab</span><span class="chip">Forgejo</span></div>
-      <hr style="border:0;border-top:1px dashed var(--line);margin:18px 0">
-      <p><strong>Stagiaire PFA — Développeur Laravel · InnovQube</strong></p>
-      <p class="meta">Juillet 2024 – Août 2024</p>
-      <p>Plateforme SaaS dédiée à la gestion des locations.</p>
-      <ul>
-        <li>Développement des fonctionnalités backend avec Laravel.</li>
-        <li>Interfaces responsives et dynamiques avec Livewire et Tailwind CSS.</li>
-        <li>Équipe Agile/Scrum (NextCloud, OpenProject).</li>
-      </ul>
-      <div class="chips"><span class="chip">Laravel</span><span class="chip">Livewire</span><span class="chip">Tailwind CSS</span><span class="chip">MySQL</span><span class="chip">GitLab</span></div>
-    </article>
+<section id="competences">
+<h2 class="rv">Compétences</h2>
+<div class="grid">
+<div class="card rv"><h3>Technologies clés</h3>
+<div class="sk">
+<div><b>Java / Spring Boot<em>90 %</em></b><div class="bar"><span data-w="90"></span></div></div>
+<div><b>PHP / Laravel<em>75 %</em></b><div class="bar"><span data-w="75"></span></div></div>
+<div><b>JavaScript / TypeScript<em>80 %</em></b><div class="bar"><span data-w="80"></span></div></div>
+<div><b>React / Next.js<em>78 %</em></b><div class="bar"><span data-w="78"></span></div></div>
+<div><b>Docker / CI/CD<em>75 %</em></b><div class="bar"><span data-w="75"></span></div></div>
+</div></div>
+<div class="card rv"><h3>Aussi au programme</h3>
+<div class="pills"><span>Angular</span><span>PostgreSQL</span><span>MySQL</span><span>MongoDB</span><span>GitLab CI/CD</span><span>Forgejo Actions</span><span>SonarQube</span><span>JUnit</span><span>Mockito</span><span>Jest</span><span>Azure</span><span>AWS</span></div>
+<h3 style="margin-top:22px">Soft skills</h3>
+<div class="pills"><span>Collaboration en Agile</span><span>Résolution de problèmes complexes</span><span>Éthique professionnelle</span></div>
+<h3 style="margin-top:22px">Langues</h3>
+<div class="pills"><span>Arabe · langue maternelle</span><span>Français · courant</span><span>Anglais · courant</span></div>
+</div>
+</div>
+</section>
 
-    <article class="card wide"><h3>🧭 Projet — Gestion de laboratoires d’analyses médicales</h3>
-      <p class="meta">Projet académique</p>
-      <p>Application web en architecture Microservices pour la gestion des laboratoires, patients et analyses médicales.</p>
-      <ul>
-        <li>Full-stack : Spring Boot + Angular.</li>
-        <li>Authentification sécurisée via Keycloak, OAuth2, JWT.</li>
-        <li>Tests unitaires avec JUnit et Mockito.</li>
-        <li>CI/CD et conteneurisation : Docker, GitHub Actions.</li>
-      </ul></article>
+<section id="formation">
+<h2 class="rv">Formation</h2>
+<div class="tl">
+<div class="card rv"><div class="meta">2020 – 2025</div><h3>Diplôme d’Ingénieur d’État · Génie Informatique</h3><div class="co">ENSA Khouribga</div></div>
+<div class="card rv"><div class="meta">2024</div><h3>ALX Software Engineering Programme</h3><div class="co">Holberton Certified</div><p>Formation intensive de 12 mois en développement Full-Stack (C++, Python, JavaScript, SQL).</p></div>
+</div>
+</section>
 
-    <article class="card skills"><h3>⚔️ Compétences</h3>
-      <dl>
-        <dt>Backend</dt><dd>Java/Spring Boot, PHP/Laravel</dd>
-        <dt>Frontend</dt><dd>JavaScript/TypeScript, React, Next.js, Angular</dd>
-        <dt>Bases de données</dt><dd>PostgreSQL, MySQL, MongoDB</dd>
-        <dt>DevOps &amp; CI/CD</dt><dd>Docker, GitLab CI/CD, Forgejo Actions</dd>
-        <dt>Qualité &amp; Tests</dt><dd>SonarQube, JUnit, Mockito, Jest</dd>
-        <dt>Cloud</dt><dd>Azure, AWS</dd>
-      </dl></article>
-
-    <article class="card"><h3>🎓 Formation &amp; certificats</h3>
-      <p><strong>Diplôme d’Ingénieur d’État — Génie Informatique</strong></p>
-      <p class="meta">ENSA Khouribga · 2020 – 2025</p>
-      <p><strong>ALX Software Engineering — Holberton Certified</strong></p>
-      <p class="meta">2024 · Formation intensive de 12 mois, Full-Stack (C++, Python, JavaScript, SQL)</p>
-      <h3 style="margin-top:16px">🗣️ Langues</h3>
-      <div class="chips"><span class="chip">Arabe · langue maternelle</span><span class="chip">Français · courant</span><span class="chip">Anglais · courant</span></div>
-      <h3 style="margin-top:16px">🤝 Soft skills</h3>
-      <div class="chips"><span class="chip">Collaboration en Agile</span><span class="chip">Résolution de problèmes complexes</span><span class="chip">Éthique professionnelle</span></div>
-    </article>
-  </div>
-  <div class="again"><button class="btn ghost" id="closeBtn" type="button">Refermer le coffre</button></div>
-</main>
+<section class="contact" id="contact">
+<h2 class="rv">Travaillons ensemble</h2>
+<p class="rv lead" style="margin-inline:auto">Curieux et proactif, je suis motivé par les nouveaux défis techniques.</p>
+<div class="btns rv">
+<a class="btn p" href="mailto:mehdiaititto239@gmail.com">mehdiaititto239@gmail.com</a>
+<a class="btn" href="tel:+212770325432">+212 770 325 432</a>
+<a class="btn" href="https://www.linkedin.com/in/elmahdi-aititto" target="_blank" rel="noopener">LinkedIn</a>
+<a class="btn" href="https://github.com/ElmahdiAi" target="_blank" rel="noopener">GitHub</a>
+</div>
+</section>
+<footer>© 2026 Elmahdi AIT ITTO</footer>
 
 <script>
 (function(){
-  var chest=document.getElementById('chest'),stage=document.getElementById('stage'),cv=document.getElementById('cv'),btn=document.getElementById('openBtn');
-  function sparks(){
-    var r=chest.getBoundingClientRect(),s=stage.getBoundingClientRect();
-    for(var i=0;i<36;i++){
-      var e=document.createElement('span');e.className='spark';
-      e.style.left=(r.left-s.left+r.width/2+(Math.random()-.5)*160)+'px';
-      e.style.top=(r.top-s.top+40)+'px';
-      e.style.setProperty('--dx',((Math.random()-.5)*200)+'px');
-      e.style.animationDelay=(Math.random()*.6)+'s';
-      stage.appendChild(e);
-      setTimeout(function(x){return function(){x.remove()}}(e),2800);
-    }
-  }
-  function open(){
-    if(chest.classList.contains('open')) return;
-    chest.classList.add('open');
-    chest.setAttribute('aria-pressed', 'true');
-    btn.disabled=true;
-    sparks();
-    setTimeout(function(){
-      cv.classList.remove('hidden');
-      var cards=cv.querySelectorAll('.card');
-      cards.forEach(function(c,i){c.style.animationDelay=(i*0.15)+'s'});
-      void cv.offsetWidth;cv.classList.add('show');
-      cv.scrollIntoView({behavior:'smooth'});
-    },1300);
-  }
-  function close(){
-    cv.classList.remove('show');cv.classList.add('hidden');
-    chest.classList.remove('open');
-    chest.setAttribute('aria-pressed', 'false');
-    btn.disabled=false;
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  btn.addEventListener('click',open);
-  chest.addEventListener('click',open);
-  chest.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
-  document.getElementById('closeBtn').addEventListener('click',close);
+var roles=["Ingénieur en Informatique","Développeur Full-Stack","Spécialiste backend Java / Spring Boot"];
+var el=document.getElementById("typed"),r=0,c=0,del=false;
+function tick(){
+var w=roles[r];
+el.textContent=w.slice(0,c);
+if(!del&&c===w.length){del=true;return setTimeout(tick,1600)}
+if(del&&c===0){del=false;r=(r+1)%roles.length}
+c+=del?-1:1;
+setTimeout(tick,del?35:70)
+}
+tick();
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+if(e.isIntersecting){e.target.classList.add("in");
+e.target.querySelectorAll("[data-w]").forEach(function(b){b.style.width=b.dataset.w+"%"});
+io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll(".rv").forEach(function(n){io.observe(n)});
 })();
 </script>
 </body>
